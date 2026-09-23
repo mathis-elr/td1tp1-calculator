@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 
 class CalculatorTest {
 
@@ -37,7 +38,7 @@ class CalculatorTest {
     }
 
     @Test
-    void div_devrait_calculer_division_deux_entier() {
+    void div_devrait_calculer_division_deux_entier() throws ArithmeticException {
         //GIVEN
         int a = 6;
         int b = 2;
@@ -61,5 +62,21 @@ class CalculatorTest {
 
         // THEN
         assertThat(resultat).isEqualTo(ensembleAttendu);
+    }
+
+    @Test
+    void div_devrait_lever_exception_si_denominateur_vaut_zero()
+    {
+        // GIVEN
+        int a = 6;
+        int b = 0;
+
+        // WHEN
+        Throwable exception = catchThrowable(() -> Calculator.div(a, b));
+
+        // THEN
+        assertThat(exception)
+                .isInstanceOf(ArithmeticException.class)
+                .hasMessage("Divison par 0 impossible");
     }
 }

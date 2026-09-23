@@ -10,8 +10,11 @@ public class Calculator
         return a + b;
     }
 
-    public static int div(int a, int b)
-    {
+    public static int div(int a, int b) throws ArithmeticException {
+        if(b == 0){
+            throw new ArithmeticException("Divison par 0 impossible");
+        }
+
         return a / b;
     }
 
