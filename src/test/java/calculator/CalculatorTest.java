@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Set;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 class CalculatorTest {
@@ -45,5 +47,19 @@ class CalculatorTest {
 
         //THEN
         assertThat(res).isEqualTo(3);
+    }
+
+    @Test
+    void ensembleChiffres_devrait_extraire_les_chiffres_uniques()
+    {
+        // GIVEN
+        int nbr = 123;
+        Set<Integer> ensembleAttendu = Set.of(1, 2, 3);
+
+        // WHEN
+        Set<Integer> resultat = Calculator.ensembleChiffres(nbr);
+
+        // THEN
+        assertThat(resultat).isEqualTo(ensembleAttendu);
     }
 }
